@@ -1,0 +1,322 @@
+.entities {
+     line-height: 2; 
+}
+
+[data-entity] {
+     padding: 0.25em 0.35em;
+     margin: 0px 0.25em;
+     line-height: 1;
+     display: inline-block;
+     border-radius: 0.25em;
+     border: 1px solid; 
+}
+
+[data-entity]::after {
+     box-sizing: border-box;
+     content: attr(data-entity);
+     font-size: 0.6em;
+     line-height: 1;
+     padding: 0.35em;
+     border-radius: 0.35em;
+     text-transform: uppercase;
+     display: inline-block;
+     vertical-align: middle;
+     margin: 0px 0px 0.1rem 0.5rem; 
+}
+
+[data-entity][data-entity="Activities & Behaviors"] {
+     background: rgba(240, 163, 255, 0.2);
+     border-color: rgb(240, 163, 255); 
+}
+
+[data-entity][data-entity="Activities & Behaviors"]::after {
+     background: rgb(240, 163, 255); 
+}
+
+
+
+[data-entity][data-entity="Anatomy"] {
+     background: rgba(255, 0, 16, 0.2);
+     border-color: rgb(255, 0, 16); 
+}
+
+[data-entity][data-entity="Anatomy"]::after {
+  color: white;
+     background: rgb(255, 0, 16); 
+}
+
+
+
+[data-entity][data-entity="Chemicals & Drugs"] {    
+    background: rgba(0, 117, 220, 0.2);
+    border-color: rgb(0, 117, 220); 
+}
+
+[data-entity][data-entity="Chemicals & Drugs"]::after {
+    color: white;
+     background: rgb(0, 117, 220); 
+}
+
+
+
+[data-entity][data-entity="Concepts & Ideas"] {
+     background: rgba(255, 255, 128, 0.2);
+     border-color: rgb(255, 255, 128); 
+}
+
+[data-entity][data-entity="Concepts & Ideas"]::after {
+     background: rgb(255, 255, 128); 
+}
+
+
+
+[data-entity][data-entity="Devices"] {
+     background: rgba(128, 128, 128, 0.2);
+     border-color: rgb(128, 128, 128); 
+}
+
+[data-entity][data-entity="Devices"]::after {
+  color: white;
+     background: rgb(128, 128, 128); 
+}
+
+
+
+[data-entity][data-entity="Disease or Syndrome"] {
+     background: rgba(255, 225, 0, 0.2);
+     border-color: rgb(255, 225, 0); 
+}
+
+[data-entity][data-entity="Disease or Syndrome"]::after {
+     background: rgb(255, 225, 0); 
+}
+
+
+
+[data-entity][data-entity="Disorders"] {
+     background: rgba(224, 255, 102, 0.2);
+     border-color: rgb(224, 255, 102); 
+}
+
+[data-entity][data-entity="Disorders"]::after {
+     background: rgb(224, 255, 102); 
+}
+
+
+
+[data-entity][data-entity="Finding"] {
+     background: rgba(148, 255, 181, 0.2);
+     border-color: rgb(148, 255, 181); 
+}
+
+[data-entity][data-entity="Finding"]::after {
+     background: rgb(148, 255, 181); 
+}
+
+
+
+[data-entity][data-entity="Functional Concept"] {
+     background: rgba(43, 206, 72, 0.2);
+     border-color: rgb(43, 206, 72); 
+}
+
+[data-entity][data-entity="Functional Concept"]::after {
+     background: rgb(43, 206, 72); 
+}
+
+
+
+[data-entity][data-entity="Genes & Molecular Sequences"] {
+     background: rgba(255, 168, 187, 0.2);
+     border-color: rgb(255, 168, 187); 
+}
+
+[data-entity][data-entity="Genes & Molecular Sequences"]::after {
+     background: rgb(255, 168, 187); 
+}
+
+
+
+[data-entity][data-entity="Living Beings"] {
+     background: rgba(255, 80, 0, 0.2);
+     border-color: rgb(255, 80, 0); 
+}
+
+[data-entity][data-entity="Living Beings"]::after {
+    color: white;
+     background: rgb(255, 80, 0); 
+}
+
+
+
+[data-entity][data-entity="Mental or Behavioral Dysfunction"] {
+     background: rgba(157, 204, 0, 0.2);
+     border-color: rgb(157, 204, 0); 
+}
+
+[data-entity][data-entity="Mental or Behavioral Dysfunction"]::after {
+     background: rgb(157, 204, 0); 
+}
+
+
+
+[data-entity][data-entity="Neoplastic Process"] {
+     background: rgba(16, 10, 255, 0.2);
+     border-color: rgb(16, 10, 255); 
+}
+
+[data-entity][data-entity="Neoplastic Process"]::after {
+    color: white;
+     background: rgb(16, 10, 255); 
+}
+
+
+
+[data-entity][data-entity="Objects"] {
+     background: rgba(153, 63, 0, 0.2);
+     border-color: rgb(153, 63, 0); 
+}
+
+[data-entity][data-entity="Objects"]::after {
+    color: white;
+     background: rgb(153, 63, 0); 
+}
+
+
+
+[data-entity][data-entity="Occupations"] {
+     background: rgba(194, 0, 136, 0.2);
+     border-color: rgb(194, 0, 136); 
+}
+
+[data-entity][data-entity="Occupations"]::after {
+    color: white;
+     background: rgb(194, 0, 136); 
+}
+
+
+
+[data-entity][data-entity="Organic Chemical"] {
+     background: rgba(25, 164, 5, 0.2);
+     border-color: rgb(25, 164, 5); 
+}
+
+[data-entity][data-entity="Organic Chemical"]::after {
+    color: white;
+     background: rgb(25, 164, 5); 
+}
+
+
+
+[data-entity][data-entity="Organizations"] {
+     background: rgba(0, 92, 49, 0.2);
+     border-color: rgb(0, 92, 49); 
+}
+
+[data-entity][data-entity="Organizations"]::after {
+    color: white;
+     background: rgb(0, 92, 49); 
+}
+
+
+
+[data-entity][data-entity="Pathologic Function"] {
+     background: rgba(94, 241, 242, 0.2);
+     border-color: rgb(94, 241, 242); 
+}
+
+[data-entity][data-entity="Pathologic Function"]::after {
+     background: rgb(94, 241, 242); 
+}
+
+
+
+[data-entity][data-entity="Pharmacologic Substance"] {
+     background: rgba(0, 153, 143, 0.2);
+     border-color: rgb(0, 153, 143); 
+}
+
+[data-entity][data-entity="Pharmacologic Substance"]::after {
+    color: white;
+     background: rgb(0, 153, 143); 
+}
+
+
+
+[data-entity][data-entity="Phenomena"] {
+     background: rgba(153, 0, 0, 0.2);
+     border-color: rgb(153, 0, 0); 
+}
+
+[data-entity][data-entity="Phenomena"]::after {
+    color: white;
+     background: rgb(153, 0, 0); 
+}
+
+
+
+[data-entity][data-entity="Physiology"] {
+     background: rgba(66, 102, 0, 0.2);
+     border-color: rgb(66, 102, 0); 
+}
+
+[data-entity][data-entity="Physiology"]::after {
+    color: white;
+     background: rgb(66, 102, 0); 
+}
+
+
+
+[data-entity][data-entity="Procedures"] {
+     background: rgba(0, 51, 128, 0.2);
+     border-color: rgb(0, 51, 128); 
+}
+
+[data-entity][data-entity="Procedures"]::after {
+    color: white;
+     background: rgb(0, 51, 128); 
+}
+
+
+
+[data-entity][data-entity="Qualitative Concept"] {
+     background: rgba(143, 124, 0, 0.2);
+     border-color: rgb(143, 124, 0); 
+}
+
+[data-entity][data-entity="Qualitative Concept"]::after {
+    color: white;
+     background: rgb(143, 124, 0); 
+}
+
+
+
+[data-entity][data-entity="Sign or Symptom"] {
+     background: rgba(255, 204, 153, 0.2);
+     border-color: rgb(255, 204, 153); 
+}
+
+[data-entity][data-entity="Sign or Symptom"]::after {
+     background: rgb(255, 204, 153); 
+}
+
+
+
+[data-entity][data-entity="Other"] {
+     background: rgba(153, 153, 153, 0.2);
+     border-color: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="Other"]::after {
+     background: rgb(153, 153, 153); 
+}
+
+
+[data-entity] {
+     background: rgba(180, 242, 225, 0.2);
+     border-color: rgb(180, 242, 225); 
+}
+
+[data-entity]::after {
+     background: rgb(180, 242, 225);     
+}

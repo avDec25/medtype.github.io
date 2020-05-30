@@ -1,295 +1,104 @@
-<!DOCTYPE html>
-<html>
-<style type="text/css" id="dark-mode-custom-style"></style>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="shortcut icon" href="./medtype_ui/images/plus.jpg">
-    <title>MedType</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Improving Medical Entity Linking with Semantic Type Prediction">
-    <meta name="keywords" content="neural,medical,linking,knowledge graphs,entity linking,text,editor,prediction,neural network,pytorch,bert-as-service">
-    <meta name="author" content="Kevin Kwok">
-    <link href="./medtype_ui/main.0a40c150.chunk.css" rel="stylesheet">
-    <link rel="stylesheet" href="./medtype_ui/codemirror.css">
-    <link rel="stylesheet" href="./medtype_ui/style.css">
-    <script type="text/javascript" async="" src="./medtype_ui/analytics.js"></script>
-    <script charset="utf-8" src="./medtype_ui/button.a9e51eea566eab199c00950f37200d0b.js"></script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+  <link rel="stylesheet" href="./entity.css">
+  <title>Med Type</title>
 </head>
 
-<body data-gr-c-s-loaded="true">
-    <div id="fb-root" class=" fb_reset">
-        <div style="position: absolute; top: -10000px; width: 0px; height: 0px;">
-            <div></div>
+<body>
+  <div class="container">
+    <div class="col align-self-center">
+
+      <div class="row" style="margin: 20px;">
+        <div class="col" align="center">
+          <img src="images/logo_noback.png" alt="MedType" height="100">
+          <h6>Improving medical Entity Linking with Semantic Type Prediction</h6>
         </div>
+      </div>
+
+      <div class="row">
+        <div class="col" align="center">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="linker-picker">Entity Linker</label>
+            </div>
+            <select class="custom-select" id="linker-picker">
+              <option value="scispacy">ScispaCy</option>
+              <option value="ctakes">cTakes</option>
+              <option value="metamap">MetaMap</option>
+              <option value="metamaplite">MetaMapLite</option>
+              <option value="quickumls">QuickUMLS</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col" align="center">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="model-picker">Med Type Model</label>
+            </div>
+            <select class="custom-select" id="model-picker">
+              <option value="0">General Text</option>
+              <option value="1">BioMedical Research</option>
+              <option value="2">Electronic Health Records</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Input Text</span>
+            </div>
+            <textarea id="user-text-input" class="form-control" aria-label="inputtext">Tuberculosis (TB) is an infectious disease usually caused by Mycobacterium tuberculosis (MTB) bacteria. Tuberculosis generally affects the lungs, but can also affect other parts of the body. Most infections show no symptoms, in which case it is known as latent tuberculosis. About 10% of latent infections progress to active disease which, if left untreated, kills about half of those affected. The classic symptoms of active TB are a chronic cough with blood-containing mucus, fever, night sweats, and weight loss. It was historically called consumption due to the weight loss. Infection of other organs can cause a wide range of symptoms.</textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 15px;">
+        <div class="col" align="right">
+          <button type="button" class="btn btn-primary" onclick="analyse()">Analyse</button>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 15px;">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              Results
+            </div>
+            <div class="card-body">
+              <div class="entities" id="annotated-text">
+                The <mark data-entity='Activities & Behaviors'>only tool</mark> we have described <mark data-entity='Anatomy'>so far </mark>to assess the usability <mark data-entity='Chemicals & Drugs'>hello amar vashishth</mark>of qualitative palettes <mark data-entity='Concepts & Ideas'>is the plotDistances function</mark>. However, we believe <mark data-entity='Devices'>that it is</mark> useful to be able to see the palettes in action in order to decide if they will work for any particular application. Toward that end, we have included a set of visualization <mark data-entity='Disease or Syndrome'>functions in the</mark> package. In Figure 8, we illustrate the “Polychrome 36” palette <mark data-entity='Disorders'>using four of</mark> these visualization tools: 1. The uvscatter function plots one point for each color in the palette using its U-V chromatic coordinates. <mark data-entity='Finding'>2. The</mark> luminance function plots one <mark data-entity='Functional Concept'>point for each</mark> color to display its luminance value, in increasing order. 3. The rancurves function generates one sine curve, with random phase and amplitude, in each color. 4. The ranpoints function generates and plots N points in each color, where <mark data-entity='Genes & Molecular Sequences'>points of the</mark> same color are roughly <mark data-entity='Living Beings'>clustered together.</mark> R> set.seed(342587) R> opar <- par(mfrow = c(2, 2), mai = c(0.82, 0.82, 0.82, 0.42)) R> uvscatter(P36) R> luminance(P36) R> <mark data-entity='Mental or Behavioral Dysfunction'>rancurves(P36)</mark> R> ranpoints(P36) R> par(opar) Additional functions (not illustrated here) allow the user to produce bar plots of colors, sorted either by hue or by luminance or in random order. These <mark data-entity='Neoplastic Process'>functions allow the</mark> user to <mark data-entity='Objects'>confirm that adjacent</mark> blocks of color can be distinguished. There are also functions that useThe only tool we have described so far to assess the usability of qualitative palettes is the<mark data-entity='Occupations'> plotDistances </mark>function. <mark data-entity='Organic Chemical'>However, we</mark> believe that it is useful to be able to see the palettes in action in order to decide if they will work for any particular application. <mark data-entity='Organizations'>Toward that end</mark>, we have <mark data-entity='Pathologic Function'>included a set</mark> of visualization functions in the package. In Figure 8, we illustrate the “Polychrome 36” palette using four of these visualization <mark data-entity='Pharmacologic Substance'>tools: 1</mark>. The uvscatter function plots one point for each color in the palette using its U-V chromatic coordinates. 2. <mark data-entity='Phenomena'>The luminance function</mark> plots one point for <mark data-entity='Physiology'>each color to</mark> display its luminance value, in increasing order. 3. The rancurves function generates one sine curve, with random phase and amplitude, in each color. 4. <mark data-entity='Procedures'>The ranpoints function</mark> generates and plots N points in each color, where points of the same color are roughly clustered together. R> set.seed(342587) R> opar <- par(mfrow = c(2, 2), mai = c(0.82, 0.82, 0.82, 0.42)) R> uvscatter(P36) R> luminance(P36) R> rancurves<mark data-entity='Qualitative Concept'>(P36)</mark> R> ranpoints(P36) <mark data-entity='Sign or Symptom'>R> par</mark>(opar) Additional functions (not illustratedhere) allow the user to produce bar plots of colors, sorted either by hue or by luminance or in <mark data-entity='Other'>random order.</mark> These functions allow the user to confirm thatadjacent<mark data-entity='testing tag'> blocks of color</mark> can be <mark data-entity='tested working'>distinguished. There</mark> are also functions that use
+              </div>
+            </div>
+          </div>          
+        </div>
+      </div>
     </div>
-    <script src="./medtype_ui/sdk.js" async="" crossorigin="anonymous"></script>
-    <script id="facebook-jssdk" src="./medtype_ui/sdk(1).js"></script>
-    <script>
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=234263839953649';
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <div id="container">
-        <div id="preamble">
-            <a href="https://github.com/svjan5/medtype" class="github-corner" aria-label="View source on Github">
-                <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#4a4a4a; color:white; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
-                    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-                    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-                    <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
-                </svg>
-            </a>
-            <style>
-                .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
-            </style>
-            
-            <center>
-                <img src="./medtype_ui/images/logo_noback.png" align="top middle" alt="centered image" style="width: 25em;">
-                <p><a href="https://arxiv.org/abs/2005.00460">Improving Medical Entity Linking with Semantic Type Prediction </a></p>
-            </center>
-        </div>
-        <div id="workaround">
-            <div id="toolbar" style="">
+  </div>
 
-                <span class="spacer"></span>
-                <span id="weirdness-stuff" class="spacer"> Entity Linker:
-                    <select id="linker_picker" value="linker" onchange="call_linker()">
-                        <option value="scispacy">ScispaCy</option>
-                        <option value="ctakes">cTAKES</option>
-                        <option value="metamap">MetaMap</option>
-                        <option value="metamaplite">MetaMapLite</option>
-                        <option value="quickumls">QuickUMLS</option>
-                    </select>
-                </span>
-                <!-- <span class="spacer"></span> -->
-
-                <span id="weirdness-stuff" class="spacer"> MedType Model:
-                    <select id="model_picker" value="model" onchange="call_linker()">
-                        <option value="general_model">General Text</option>
-                        <option value="pubmed_model">BioMedical Research</option>
-                        <option value="ehr_model">Electronic Health Records</option>
-                    </select>
-                </span>
-                <span class="spacer"></span>
-                
-                <button id="umls-link" onclick="launch_umls()">UMLS Lookup ›</button>
-                <button id="do-stuff" onclick="call_linker()">Run ›</button>
-            </div>
-             <div id="editor">
-                <textarea id="text_input" class="CodeMirror cm-s-default CodeMirror-wrap CodeMirror-focused writer" rows="5" >Tuberculosis (TB) is an infectious disease usually caused by Mycobacterium tuberculosis (MTB) bacteria. Tuberculosis generally affects the lungs, but can also affect other parts of the body. Most infections show no symptoms, in which case it is known as latent tuberculosis. About 10% of latent infections progress to active disease which, if left untreated, kills about half of those affected. The classic symptoms of active TB are a chronic cough with blood-containing mucus, fever, night sweats, and weight loss. It was historically called "consumption" due to the weight loss. Infection of other organs can cause a wide range of symptoms.</textarea>
-            </div>
-           
-
-            <div class="pane__bottom model__output ">
-                <div class="pane__thumb"></div>
-                <div class="model__content model__content--ner-output">
-                    <div class="Form__FormField-sc-1mucple-0 hdCOWv">
-                        <div id="results" class="passage model__content__summary highlight-container highlight-container--bottom-labels">  
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./medtype_ui/lodash.js"></script>
-    <script src="./medtype_ui/notify.min.js"></script>
-    <script>
-        colors = ['fuchsia ', 'blue', 'red', 'green', 'purple', 'orange', 'pink', 'teal', 'cobalt', 'blue', 'red', 'green', 'purple', 'orange', 'pink', 'teal', 'cobalt', 'brown',  'gray', 'slate', 'tan']
-
-        function add_token(token, info, is_annotated){
-            console.log(token, info, is_annotated)
-            var tag = document.createElement("span");
-
-            if (is_annotated && info['filtered_candidates'].length != 0){
-                var rand_color = colors[Math.floor(Math.random() * colors.length)]
-                var cui = info['filtered_candidates'][0][0]
-                var sem_type = info['pred_type']
-
-                token = _.trim(token)
-
-                ele = `<span class="highlight bottom ${rand_color}" data-label="LOC" onclick="copyToClipboard('${cui}')"> \
-                            <span class="highlight__content">${token} </span> \
-                            <span class="highlight__label"> <strong>${cui}</strong> </span> \
-                            <span class="highlight__label"> <strong>${sem_type}</strong> </span> \
-                            <span class="highlight__tooltip">${cui}</span> \
-                       </span>`
-
-                $("#results").append(ele);
-            }
-            else{
-                $("#results").append('<span>' + token + ' </span>');
-            }
-        }
-
-        function update_results(resp){
-             console.log(resp)
-
-            $( "#results" ).empty();
-
-            mentions = resp['result']['elinks'][0]['mentions']
-            text     = resp['result']['elinks'][0]['text']
-            offsets  = []
-
-            if (mentions.length == 0){
-                add_token(text, null, false)
-            }
-
-            else{
-                mentions = _.sortBy(mentions, [function(x) {return x['end_offset'];} ])
-
-                console.log('before')
-                console.log(mentions)
-                // Remove overlapping mentions
-                for (i = mentions.length-1; i > 0 && i < mentions.length; i--){
-                    curr = mentions[i]
-                    prev = mentions[i-1]
-
-                    if (curr['end_offset'] == prev['end_offset']){
-                        if ((curr['end_offset'] - curr['start_offset']) > (prev['end_offset'] - prev['start_offset'])){
-                            mentions.splice(i-1, 1)
-                        }
-                        else {
-                            mentions.splice(i, 1)
-                        }
-                    }
-                }
-
-
-                mentions = _.sortBy(mentions, [function(x) {return x['start_offset'];} ])
-
-                console.log('before')
-                console.log(mentions)
-                // Remove overlapping mentions
-                for (i = mentions.length-1; i > 0 && i < mentions.length; i--){
-                    curr = mentions[i]
-                    prev = mentions[i-1]
-
-                    if (curr['start_offset'] == prev['start_offset']){
-                        if ((curr['end_offset'] - curr['start_offset']) > (prev['end_offset'] - prev['start_offset'])){
-                            mentions.splice(i-1, 1)
-                        }
-                        else {
-                            mentions.splice(i, 1)
-                        }
-                    }
-                }
-
-                console.log('after')
-                console.log(mentions)
-
-                for (i=0; i < mentions.length; i++){
-                    offsets.push([mentions[i]['start_offset'], mentions[i]['end_offset']])
-                }
-                console.log(offsets)
-
-                console.log('beginning')
-                first_start = offsets[0][0]
-                if (first_start != 0){
-                    tokens = text.substring(0, first_start).split(' ')
-                    for (j=0; j < tokens.length; j++){
-                        add_token(tokens[j], null, false)
-                    }
-                }
-
-                console.log('middle')
-                for (i=0; i < offsets.length - 1; i++){
-                    start     = offsets[i][0]
-                    end       = offsets[i][1]
-                    start_nxt = offsets[i+1][0]
-                    end_nxt   = offsets[i+1][1]
-
-                    add_token(text.substring(start, end), mentions[i], true)
-                    tokens = text.substring(end, start_nxt).split(' ')
-                    for (j=0; j < tokens.length; j++){
-                        add_token(tokens[j], null, false)
-                    }
-                }
-
-                console.log('end')
-
-                last_start = offsets[offsets.length - 1][0]
-                last_end   = offsets[offsets.length - 1][1]
-                add_token(text.substring(last_start, last_end), mentions[mentions.length - 1], true)
-
-                tokens = text.substring(last_end, text.length).split(' ')
-                for (j=0; j < tokens.length; j++){
-                    add_token(tokens[j], null, false)
-                }
-            }
-            document.getElementById('model_picker').disabled = false;
-            document.getElementById('linker_picker').disabled = false;
-            $('.notifyjs-wrapper').trigger('notify-hide');
-        }
-
-        function call_linker(){
-            $.notify("Loading", "info");
-
-            document.getElementById('model_picker').disabled = true;
-            document.getElementById('linker_picker').disabled = true;
-
-            text   = document.getElementById('text_input').value
-            model  = document.getElementById('model_picker').value.toLowerCase()
-            linker = document.getElementById('linker_picker').value.toLowerCase()
-
-            msg  = {
-                "id": Math.floor(Math.random() *  100000),
-                "data": {
-                    "text": [text],
-                    "entity_linker": linker
-                }
-            }
-
-            model2url = {
-                'general_model': 'https://128.2.204.127:8124/run_linker',
-                'pubmed_model' : 'https://128.2.204.127:8125/run_linker',
-                'ehr_model'    : 'https://128.2.204.127:8126/run_linker'
-            }
-
-            console.log(model2url[model])
-            $.ajax({
-                type: "POST",
-                url: model2url[model],
-                success: update_results,
-                data: JSON.stringify(msg),
-                dataType: "json",
-                contentType: "application/json",
-                error: function(e) {
-                    $.notify("Error encoutered while accessing the server");
-                    alert('Need to accept the certificate before accessing the demo. Press Ok to continue. Come back to this page once done!')
-                    window.open("https://128.2.204.127:8125/run_linker");
-                },
-            });
-        }
-
-        function copyToClipboard(text) {
-            var $temp = $("<input>");
-            $("body").append($temp);
-            $temp.val(text).select();
-            document.execCommand("copy");
-            $temp.remove();
-            $.notify("Copied " + text, "success");
-        }
-
-        function launch_umls(){
-            window.open("https://uts.nlm.nih.gov/metathesaurus.html");
-        }
-
-        $(document).keydown(function(event) {            
-            if ((event.ctrlKey && event.keyCode === 13) || (event.metaKey && event.keyCode === 13)) {
-                call_linker()
-            }
-        })
-
-    </script>
-
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="./functionality.js"></script>
 </body>
+
 </html>
