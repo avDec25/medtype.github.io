@@ -21,7 +21,7 @@
       <div class="row" style="margin: 20px;">
         <div class="col" align="center">
           <img src="images/logo_noback.png" alt="MedType" height="100">
-          <h6>Improving medical Entity Linking with Semantic Type Prediction</h6>
+          <h6>Improving Medical Entity Linking with Semantic Type Prediction</h6>
         </div>
       </div>
 
@@ -68,7 +68,9 @@
 
       <div class="row" style="margin-top: 15px;">
         <div class="col" align="right">
-          <button type="button" class="btn btn-primary" onclick="analyse()">Analyse</button>
+          <button id="analyse-button" class="btn btn-primary" onclick="analyse()">
+            Analyse <span id="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>          
         </div>
       </div>
 
@@ -76,7 +78,9 @@
         <div class="col">
           <div class="card">
             <div class="card-header">
-              Results
+              Results 
+              <span id="linker-badge" class="badge badge-success">linker</span> 
+              <span id="model-badge" class="badge badge-warning">model</span>
             </div>
             <div class="card-body">
               <div class="entities" id="annotated-text">
@@ -98,7 +102,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
-  <script src="./functionality.js"></script>
+  <script src="./functionality.js"></script>  
 </body>
 
 </html>

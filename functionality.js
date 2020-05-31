@@ -2,14 +2,28 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+$("#loader").hide();
+$("#analyse-button").css("width", "10%");
+
+function startRun() {  
+  $("#loader").show();  
+  $("#analyse-button").prop('disabled', true);
+}
+
+function endRun() {  
+  $("#loader").hide();
+  $("#analyse-button").prop('disabled', false);
+}
+
 function analyse() {
-  console.log("Analyse Clicked")
+  console.log("Analyse Clicked");
+  startRun(); 
 
   usertext = $("#user-text-input").val()
 
-  linkerPicked = $('#linker-picker').val()
-  
-  modelPicked = $('#model-picker').val()
+  linkerPicked = $('#linker-picker').val();
+
+  modelPicked = $('#model-picker').val();
   model2url = {
     '0': 'https://128.2.204.127:8124/run_linker',
     '1': 'https://128.2.204.127:8125/run_linker',
@@ -39,7 +53,31 @@ function analyse() {
     printResponse(response);
     annotatedText = prepareAnnotatedText(response);
     insertResults(annotatedText);
-  });
+    updateBadges(linkerPicked, modelPicked);
+    endRun();
+  });  
+}
+
+function updateBadges(linkerPicked, modelPicked) {
+  $("#linker-badge").html(linkerPicked);
+  model = ""
+  switch (modelPicked) {
+    case '0':
+      model = "general";
+      break;
+  
+    case '1':
+      model = "bioMedical";
+      break;
+
+    case '2':
+      model = "electronicHealth";
+      break;
+
+    default:
+      break;
+  }  
+  $("#model-badge").html(model);
 }
 
 function printResponse(response) {
@@ -89,10 +127,7 @@ function prepareAnnotatedText(response) {
     rear = userText.slice(insertEndAt);
     userText = front + rear;
 
-    tagToInsert = "<mark data-entity='"+ predicted +"'>";
-    if(element["pred_type"].length > 1) {    
-      // generateCssForMultiMark(predicted);
-    }    
+    tagToInsert = "<mark data-entity='"+ predicted +"'>";    
     front = userText.slice(0, insertStartAt) + tagToInsert;
     rear = userText.slice(insertStartAt);
     userText = front + rear;
